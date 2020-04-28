@@ -1,0 +1,4 @@
+[submodule "toolchain64"]
+	path = toolchain64
+	url = https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9
+	branch = android10-release
