@@ -22,17 +22,17 @@ make O=out mrproper
 
 echo -e "\n\nPreparing configuration file...\n"
 # prepare for build with specified defconfig
-# arch/arm64/configs/defconfig
-make O=out ARCH=arm64 sm8150-perf_defconfig
+# arch/arm64/configs/vendor/sm8150-perf_defconfig
+make O=out ARCH=arm64 vendor/sm8150-perf_defconfig
 
 echo -e "\n\nStart building kernel source...\n"
 # start the build
 # (and hope to fucking god it bloody works...)
-make O=out \
-     ARCH=arm64 \
-     CC=clang \
-     CLANG_TRIPLE=aarch64-linux-gnu- \
-     CROSS_COMPILE=aarch64-linux-android-
+make -j$(nproc --all) O=out \
+                      ARCH=arm64 \
+                      CC=clang \
+                      CLANG_TRIPLE=aarch64-linux-gnu- \
+                      CROSS_COMPILE=aarch64-linux-android-
 
 echo -e "\n"
 echo -e "############################"
