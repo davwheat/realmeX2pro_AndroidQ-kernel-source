@@ -1,31 +1,36 @@
 #!/bin/bash
 
-echo
-
 echo -e "\n"
 echo -e "############################"
 echo -e "#      BUILD STARTING      #"
 echo -e "############################"
 echo -e "\n"
 
-echo -e "\n\nCreating output directory...\n"
+echo -e "Creating output directory..."
 # create output directory
 mkdir -p out
 
-echo -e "\n\nPreparing PATH...\n"
+echo -e "Setting up exports..."
 # add prebuilts to path for duration of this script
 PATH="$(pwd)/prebuilts/clang/bin:$(pwd)/prebuilts/gcc/bin:${PATH}"
+# export variables needed for kernel build because of OPPO's silly
+# method for building their fingerprint drivers
+export TARGET_PRODUCT=msmnile
+export OPPO_TARGET_DEVICE=MSM_8150
 
-echo -e "\n\nCleaning up last build...\n"
-# clean up last (attempted) build
+echo -e "Cleaning up last build..."
+echo -e "############################\n"
+# clean up last build
 make O=out mrproper
 
-echo -e "\n\nPreparing configuration file...\n"
+echo -e "Preparing configuration file..."
+echo -e "############################\n"
 # prepare for build with specified defconfig
 # arch/arm64/configs/vendor/sm8150-perf_defconfig
 make O=out ARCH=arm64 vendor/sm8150-perf_defconfig
 
-echo -e "\n\nStart building kernel source...\n"
+echo -e "\n\nStart building kernel source..."
+echo -e "############################\n"
 # start the build
 # (and hope to fucking god it bloody works...)
 make -j$(nproc --all) O=out \
