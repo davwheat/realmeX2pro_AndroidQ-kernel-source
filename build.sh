@@ -15,8 +15,8 @@ echo -e "Setting up exports..."
 PATH="$(pwd)/prebuilts/clang/bin:$(pwd)/prebuilts/gcc/bin:${PATH}"
 # export variables needed for kernel build because of OPPO's silly
 # method for building their fingerprint drivers
-export TARGET_PRODUCT=msmnile
-export OPPO_TARGET_DEVICE=MSM_8150
+TARGET_PRODUCT=msmnile
+OPPO_TARGET_DEVICE=MSM_8150
 
 echo -e "Cleaning up last build..."
 echo -e "############################\n"
